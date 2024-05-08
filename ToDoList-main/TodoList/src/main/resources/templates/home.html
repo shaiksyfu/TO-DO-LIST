@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .body1 {
+            background-image: url('https://hatio.in/static/hero-ea0cee0f24925ea2e08543c5e68541f7.webp');
+            /* Adjust background image properties as needed */
+            background-size: 40% auto; /* Cover only 40% of the container's width, maintain aspect ratio */
+            background-position: center top 50px; /* Center the background image horizontally and move it down by 50 pixels */
+            background-repeat: no-repeat; /* Do not repeat the background image */
+            position: absolute;
+            justify-content : center;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Ensure the background stays behind the content */
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/home">Hatio Innovations</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" target="_blank" href="https://hatio.in/">About</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="createProject">Create Project</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="viewprojects">View Project</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="body1"></div>
+
+    <!-- Bootstrap JS and jQuery (Optional) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

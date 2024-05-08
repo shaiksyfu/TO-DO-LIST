@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create New Task</title>
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	rel="stylesheet">
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/home">Hatio Innovations</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
+					<li class="nav-item"><a class="nav-link" target="_blank" href="https://hatio.in/" >About</a></li>
+				</ul>
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a class="nav-link" href="createProject">Create
+							Project</a></li>
+					<li class="nav-item"><a class="nav-link" href="viewprojects">View
+							Project</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+
+
+	<div class="container mt-4">
+		<h3 th:text="'Project Title: ' + ${project.projectTitle}"></h3>
+
+		<div class="card mt-4">
+			<div class="card-body">
+				<h5 class="card-title">New Task</h5>
+				<form th:action="@{'/addTask/' + ${project.projectId}}"
+					method="post">
+					<div class="form-group">
+						<label for="taskTitle">Task Title</label> <input type="text"
+							class="form-control" id="taskTitle" name="taskTitle"
+							placeholder="Enter task title" required>
+					</div>
+					<div class="form-group">
+						<label for="taskDescription">Task Description</label>
+						<textarea class="form-control" id="taskDescription"
+							name="taskDescription" rows="3"
+							placeholder="Enter task description" required></textarea>
+					</div>
+					<button type="submit" class="btn btn-primary">Create Task</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

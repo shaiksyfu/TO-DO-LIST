@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Records</title>
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	rel="stylesheet">
+</head>
+<body>
+
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/home">Hatio Innovations</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
+					<li class="nav-item"><a class="nav-link" target="_blank" href="https://hatio.in/" >About</a></li>
+				</ul>
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a class="nav-link" href="/createProject">Create
+							Project</a></li>
+					<li class="nav-item"><a class="nav-link" href="/viewprojects">View
+							Project</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+
+	<div class="container mt-4">
+		<div class="row">
+			<div class="col-sm-8">
+				<h2 th:if="${tasks.size() != 0}"
+					th:text="${project.projectTitle + ' (' + completedTasks + '/' + tasks.size() + ') Completed tasks'}">
+				</h2>
+			</div>
+			<div class="col-sm-2 text-right">
+				<form th:action="@{'/createTask/' + ${project.projectId}}"
+					method="post" class="d-inline">
+					<input name="id" type="hidden" th:value="${project.projectId}">
+					<button type="submit" class="btn btn-primary">Add new Task</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div class="container mt-4">
+
+		<h3>Pending Tasks</h3>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Task Title</th>
+					<th>Task Description</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<tr th:each="task : ${tasks}" th:if="${!task.taskStatus}">
+					<td th:text="${task.taskTitle}"></td>
+					<td th:text="${task.taskDescription}"></td>
+					<td>
+						<form style="margin-right: 6px;"
+							th:action="@{'/editRecord/' + ${task.taskId}}" method="post"
+							class="d-inline">
+							<input type="hidden" name="projectId"
+								th:value="${project.projectId}">
+							<button type="submit" class="btn btn-primary btn-sm">Edit</button>
+						</form>
+						<form style="margin-right: 6px;"
+							th:action="@{'/deleteRecord/' + ${task.taskId}}" class="d-inline"
+							method="post">
+							<input type="hidden" name="projectId"
+								th:value="${project.projectId}">
+							<button type="submit" class="btn btn-danger btn-sm">Delete</button>
+						</form>
+						<form style="margin-right: 6px;"
+							th:action="@{'/complete/' + ${task.taskId}}" method="post"
+							class="d-inline">
+							<input type="hidden" name="projectId"
+								th:value="${project.projectId}">
+							<button type="submit" class="btn btn-success btn-sm">Mark
+								as complete</button>
+						</form>
+
+					</td>
+				</tr>
+				<!-- Display message if no tasks -->
+				<tr th:if="${#lists.isEmpty(tasks)}">
+					<td colspan="3" class="text-center">No tasks available</td>
+				</tr>
+				<tr th:if="${completedTasks == tasks.size() and tasks.size() != 0}">
+					<td colspan="3" class="text-center">All Tasks are completed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<br>
+	<div class="container mt-4">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Task Title</th>
+					<th>Task Description</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- Iterate over records -->
+				<tr th:each="task : ${tasks}" th:if="${task.taskStatus}">
+					<td th:text="${task.taskTitle}"></td>
+					<td th:text="${task.taskDescription}"></td>
+					<td>
+						<form th:action="@{'/incomplete/' + ${task.taskId}}" method="post"
+							class="d-inline">
+							<input type="hidden" name="projectId"
+								th:value="${project.projectId}">
+							<button type="submit" class="btn btn-danger btn-sm">Mark
+								as incomplete</button>
+						</form>
+					</td>
+				</tr>
+				<!-- Display message if no tasks -->
+				<tr th:if="${#lists.isEmpty(tasks)}">
+					<td colspan="3" class="text-center">No tasks available</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

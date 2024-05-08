@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>View All Projects</title>
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	rel="stylesheet">
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/home">Hatio Innovations</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
+					<li class="nav-item"><a class="nav-link" target="_blank" href="https://hatio.in/" >About</a></li>
+				</ul>
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a class="nav-link" href="createProject">Create
+							Project</a></li>
+					<li class="nav-item"><a class="nav-link" href="viewprojects">View
+							Project</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+
+	<div class="container">
+		<h2>View All Projects</h2>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Project ID</th>
+					<th>Project Title</th>
+					<th>Creation Date</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="project : ${projects}">
+					<td th:text="${project.projectId}"></td>
+					<td th:text="${project.projectTitle}"></td>
+					<td th:text="${project.projectCreationDate}"></td>
+					<td>
+						<form th:action="@{'/createTask/' + ${project.projectId}}"
+							method="post" class="d-inline">
+							<input name="id" type="hidden" th:value="${project.projectId}">
+							<button type="submit" class="btn btn-primary mr-2">Add
+								new Task</button>
+						</form>
+						<form th:action="@{'/viewAllTasks/' + ${project.projectId}}"
+							method="get" class="d-inline">
+							<button type="submit" class="btn btn-success mr-2">View
+								All tasks</button>
+						</form>
+						<form th:action="@{/editProject}" method="post" class="d-inline">
+							<input type="hidden" name="projectId"
+								th:value="${project.projectId}">
+							<button type="submit" class="btn btn-warning">Edit
+								Project</button>
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</body>
+</html>
